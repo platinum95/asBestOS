@@ -1,0 +1,498 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD build/entry.o
+LOAD build/font.o
+LOAD build/gpio.o
+LOAD build/main.o
+LOAD build/memory.o
+LOAD build/timers.o
+LOAD build/framebuffer.O
+LOAD build/postman_interface.O
+LOAD build/postman.O
+                0x0000000000008000                PROVIDE (__executable_start, 0x8000)
+                0x0000000000008000                . = 0x8000
+
+.interp
+ *(.interp)
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.hash
+ *(.hash)
+
+.gnu.hash
+ *(.gnu.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+
+.rela.text
+ *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+
+.rela.rodata
+ *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+
+.rel.data.rel.ro
+ *(.rel.data.rel.ro* .rel.gnu.linkonce.d.rel.ro.*)
+
+.rela.data.rel.ro
+ *(.rela.data.rel.ro* .rela.gnu.linkonce.d.rel.ro.*)
+
+.rel.data
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+
+.rela.data
+ *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+
+.rel.tdata
+ *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
+
+.rela.tdata
+ *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+
+.rel.tbss
+ *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
+
+.rela.tbss
+ *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
+
+.rela.bss
+ *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+
+.rel.iplt       0x0000000000008000        0x0
+                0x0000000000008000                PROVIDE (__rel_iplt_start, .)
+ *(.rel.iplt)
+ .rel.iplt      0x0000000000000000        0x0 build/entry.o
+                0x0000000000008000                PROVIDE (__rel_iplt_end, .)
+
+.rela.iplt      0x0000000000008000        0x0
+                0x0000000000008000                PROVIDE (__rela_iplt_start, .)
+ *(.rela.iplt)
+                0x0000000000008000                PROVIDE (__rela_iplt_end, .)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.init           0x0000000000008000       0xb0
+ *(.init)
+ .init          0x0000000000008000       0xb0 build/entry.o
+                0x0000000000008000                _start
+ .init          0x00000000000080b0        0x0 build/main.o
+
+.plt
+ *(.plt)
+
+.iplt           0x00000000000080b0        0x0
+ *(.iplt)
+ .iplt          0x0000000000000000        0x0 build/entry.o
+
+.text           0x00000000000080b0      0x978
+ *(.text.unlikely .text.*_unlikely)
+ *(.text.exit .text.exit.*)
+ *(.text.startup .text.startup.*)
+ *(.text.hot .text.hot.*)
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text          0x00000000000080b0        0x0 build/entry.o
+ .text          0x00000000000080b0       0xcc build/font.o
+                0x00000000000080b0                draw_nullt_string
+                0x00000000000080b0                generate_character_set
+                0x00000000000080f8                draw_char
+ .text          0x000000000000817c      0x13c build/gpio.o
+                0x00000000000081bc                GPIO_SetPinFunction
+                0x00000000000081f4                GPIO_GetPinFunction
+                0x0000000000008220                GPIO_SetPin
+                0x000000000000825c                GPIO_ClearPin
+                0x0000000000008298                GPIO_SetPinValue
+ .text          0x00000000000082b8      0x100 build/main.o
+                0x00000000000082b8                main
+                0x000000000000834c                Flash_Binary
+                0x0000000000008388                FAILED
+ .text          0x00000000000083b8       0x8c build/memory.o
+                0x00000000000083b8                memcpy
+                0x0000000000008428                memfill
+ .text          0x0000000000008444       0x2c build/timers.o
+                0x0000000000008444                Timer_WaitMicros
+ .text          0x0000000000008470      0x26c build/framebuffer.O
+                0x0000000000008470                FrameBuffer_Initialise_Tag
+                0x0000000000008610                draw_point
+ .text          0x00000000000086dc      0x2e4 build/postman_interface.O
+                0x00000000000086dc                Tag_Reset
+                0x0000000000008708                Tag_ProcessTags
+                0x000000000000873c                Tag_addTag
+                0x00000000000088e4                Tag_GetResult
+ .text          0x00000000000089c0       0x68 build/postman.O
+                0x00000000000089c0                gfx_MailboxWrite
+                0x00000000000089f4                gfx_MailboxRead
+ *(.gnu.warning)
+ *(.glue_7t)
+ .glue_7t       0x0000000000000000        0x0 linker stubs
+ *(.glue_7)
+ .glue_7        0x0000000000000000        0x0 linker stubs
+ *(.vfp11_veneer)
+ .vfp11_veneer  0x0000000000000000        0x0 linker stubs
+ *(.v4_bx)
+ .v4_bx         0x0000000000000000        0x0 linker stubs
+
+.fini
+ *(.fini)
+                0x0000000000008a28                PROVIDE (__etext, .)
+                0x0000000000008a28                PROVIDE (_etext, .)
+                0x0000000000008a28                PROVIDE (etext, .)
+
+.rodata
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+
+.rodata1
+ *(.rodata1)
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x0000000000008a28                PROVIDE (__exidx_start, .)
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x0000000000008a28                PROVIDE (__exidx_end, .)
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.eh_frame
+ *(.eh_frame)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.exception_ranges
+ *(.exception_ranges .exception_ranges*)
+
+.eh_frame
+ *(.eh_frame)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.exception_ranges
+ *(.exception_ranges .exception_ranges*)
+
+.tdata
+ *(.tdata .tdata.* .gnu.linkonce.td.*)
+
+.tbss
+ *(.tbss .tbss.* .gnu.linkonce.tb.*)
+ *(.tcommon)
+
+.preinit_array  0x0000000000008a28        0x0
+                0x0000000000008a28                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x0000000000008a28                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x0000000000008a28        0x0
+                0x0000000000008a28                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x0000000000008a28                PROVIDE (__init_array_end, .)
+
+.fini_array     0x0000000000008a28        0x0
+                0x0000000000008a28                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array)
+                0x0000000000008a28                PROVIDE (__fini_array_end, .)
+
+.ctors
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+
+.dtors
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+
+.jcr
+ *(.jcr)
+
+.data.rel.ro
+ *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
+ *(.data.rel.ro* .gnu.linkonce.d.rel.ro.*)
+
+.dynamic
+ *(.dynamic)
+
+.got            0x0000000000008a28        0x0
+ *(.got.plt)
+ *(.igot.plt)
+ .igot.plt      0x0000000000000000        0x0 build/entry.o
+ *(.got)
+ *(.igot)
+
+.data           0x0000000000008a30     0x8870
+                0x0000000000008a30                __data_start = .
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x0000000000008a30        0x0 build/entry.o
+ .data          0x0000000000008a30      0x808 build/font.o
+ .data          0x0000000000009238        0x4 build/gpio.o
+ .data          0x000000000000923c       0x1d build/main.o
+ .data          0x0000000000009259        0x0 build/memory.o
+ .data          0x0000000000009259        0x4 build/timers.o
+ .data          0x000000000000925d       0x18 build/framebuffer.O
+                0x000000000000925d                framebuffer_physical_width
+                0x0000000000009261                framebuffer_physical_height
+                0x0000000000009265                framebuffer_pitch
+                0x000000000000926d                framebuffer_addr
+                0x0000000000009271                framebuffer_size
+ *fill*         0x0000000000009275        0xb 
+ .data          0x0000000000009280     0x8020 build/postman_interface.O
+ .data          0x00000000000112a0        0x0 build/postman.O
+
+.data1
+ *(.data1)
+                0x00000000000112a0                _edata = .
+                0x00000000000112a0                PROVIDE (edata, .)
+                0x00000000000112a0                __bss_start = .
+                0x00000000000112a0                __bss_start__ = .
+
+.bss            0x00000000000112a0        0x0
+ *(.dynbss)
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x00000000000112a0        0x0 build/entry.o
+ .bss           0x00000000000112a0        0x0 build/font.o
+ .bss           0x00000000000112a0        0x0 build/gpio.o
+ .bss           0x00000000000112a0        0x0 build/main.o
+ .bss           0x00000000000112a0        0x0 build/memory.o
+ .bss           0x00000000000112a0        0x0 build/timers.o
+ .bss           0x00000000000112a0        0x0 build/framebuffer.O
+ .bss           0x00000000000112a0        0x0 build/postman_interface.O
+ .bss           0x00000000000112a0        0x0 build/postman.O
+ *(COMMON)
+                0x00000000000112a0                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x00000000000112a0                _bss_end__ = .
+                0x00000000000112a0                __bss_end__ = .
+                0x00000000000112a0                . = ALIGN (0x4)
+                0x00000000000112a0                . = ALIGN (0x4)
+                0x00000000000112a0                __end__ = .
+                0x00000000000112a0                _end = .
+                0x00000000000112a0                PROVIDE (end, .)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000      0x120
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 build/entry.o
+ .debug_aranges
+                0x0000000000000020       0x20 build/font.o
+ .debug_aranges
+                0x0000000000000040       0x20 build/gpio.o
+ .debug_aranges
+                0x0000000000000060       0x20 build/main.o
+ .debug_aranges
+                0x0000000000000080       0x20 build/memory.o
+ .debug_aranges
+                0x00000000000000a0       0x20 build/timers.o
+ .debug_aranges
+                0x00000000000000c0       0x20 build/framebuffer.O
+ .debug_aranges
+                0x00000000000000e0       0x20 build/postman_interface.O
+ .debug_aranges
+                0x0000000000000100       0x20 build/postman.O
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x0000000000000000      0x2b6
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000       0x4b build/entry.o
+ .debug_info    0x000000000000004b       0x4a build/font.o
+ .debug_info    0x0000000000000095       0x4a build/gpio.o
+ .debug_info    0x00000000000000df       0x4a build/main.o
+ .debug_info    0x0000000000000129       0x4c build/memory.o
+ .debug_info    0x0000000000000175       0x4c build/timers.o
+ .debug_info    0x00000000000001c1       0x51 build/framebuffer.O
+ .debug_info    0x0000000000000212       0x57 build/postman_interface.O
+ .debug_info    0x0000000000000269       0x4d build/postman.O
+
+.debug_abbrev   0x0000000000000000       0xb4
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000       0x14 build/entry.o
+ .debug_abbrev  0x0000000000000014       0x14 build/font.o
+ .debug_abbrev  0x0000000000000028       0x14 build/gpio.o
+ .debug_abbrev  0x000000000000003c       0x14 build/main.o
+ .debug_abbrev  0x0000000000000050       0x14 build/memory.o
+ .debug_abbrev  0x0000000000000064       0x14 build/timers.o
+ .debug_abbrev  0x0000000000000078       0x14 build/framebuffer.O
+ .debug_abbrev  0x000000000000008c       0x14 build/postman_interface.O
+ .debug_abbrev  0x00000000000000a0       0x14 build/postman.O
+
+.debug_line     0x0000000000000000      0x4b5
+ *(.debug_line)
+ .debug_line    0x0000000000000000       0x6c build/entry.o
+ .debug_line    0x000000000000006c       0x75 build/font.o
+ .debug_line    0x00000000000000e1       0x8e build/gpio.o
+ .debug_line    0x000000000000016f       0x7f build/main.o
+ .debug_line    0x00000000000001ee       0x5f build/memory.o
+ .debug_line    0x000000000000024d       0x49 build/timers.o
+ .debug_line    0x0000000000000296       0xd7 build/framebuffer.O
+ .debug_line    0x000000000000036d       0xed build/postman_interface.O
+ .debug_line    0x000000000000045a       0x5b build/postman.O
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.stack          0x0000000000080000        0x0
+                0x0000000000080000                _stack = .
+ *(.stack)
+
+.ARM.attributes
+                0x0000000000000000       0x16
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x0000000000000000       0x14 build/entry.o
+ .ARM.attributes
+                0x0000000000000014       0x14 build/font.o
+ .ARM.attributes
+                0x0000000000000028       0x14 build/gpio.o
+ .ARM.attributes
+                0x000000000000003c       0x14 build/main.o
+ .ARM.attributes
+                0x0000000000000050       0x14 build/memory.o
+ .ARM.attributes
+                0x0000000000000064       0x14 build/timers.o
+ .ARM.attributes
+                0x0000000000000078       0x16 build/framebuffer.O
+ .ARM.attributes
+                0x000000000000008e       0x14 build/postman_interface.O
+ .ARM.attributes
+                0x00000000000000a2       0x14 build/postman.O
+ *(.gnu.attributes)
+
+.note.gnu.arm.ident
+ *(.note.gnu.arm.ident)
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+OUTPUT(build/output.elf elf32-littlearm)
